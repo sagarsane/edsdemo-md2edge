@@ -1,0 +1,16 @@
+application:
+  actions: actions
+  runtimeManifest:
+    packages:
+      md2edge:
+        license: Apache-2.0
+        actions:
+          md2html:
+            function: actions/md2html/index.js
+            web: 'yes'
+            runtime: nodejs:18
+            inputs:
+              LOG_LEVEL: debug
+            annotations:
+              require-adobe-auth: true
+              final: true
