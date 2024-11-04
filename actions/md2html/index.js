@@ -18,7 +18,7 @@ import { errorResponse } from "../utils.js";
 import markdownItToHtml from "./MarkdownIt.js";
 
 const gitProxy =
-  "https://raw.githubusercontent.com/ahmed-musallam/md/refs/heads/main/content";
+  "https://raw.githubusercontent.com/sagarsane/edsdemo-md/refs/heads/main/content";
 
 async function fetchWithIndexFallback(path) {
   const response = await fetch(`${gitProxy}${path}.md`);
