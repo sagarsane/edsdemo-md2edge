@@ -10,9 +10,10 @@ import ins from "markdown-it-ins";
 import mark from "markdown-it-mark";
 import sub from "markdown-it-sub";
 import sup from "markdown-it-sup";
+import meta from "markdown-it-meta";
 
 export default function markdownItToHtml(mdString) {
-  return markdownit({
+  const md = markdownit({
     html: true,
     breaks: true,
     typographer: true,
@@ -30,5 +31,35 @@ export default function markdownItToHtml(mdString) {
     .use(mark)
     .use(sub)
     .use(sup)
-    .render(mdString);
+    .use(meta);
+
+  return toHtmlDoc(md.render(mdString), md.meta);
 }
+
+const metaToHtml = (meta) => {
+  let metaHtml = "";
+  for (const key in meta) {
+    metaHtml += `\n<meta name="${key}" content="${meta[key]}">`;
+  }
+  return metaHtml;
+};
+
+const toHtmlDoc = (mainHtml, meta) => {
+  return `<!DOCTYPE html>
+  <html>
+    <head>
+      <title>${meta.title}</title>
+      ${metaToHtml(meta)}
+    </head>
+    <body>
+      <header></header>
+      <main>
+        <div>
+          ${mainHtml}
+        </div>
+      </main>
+      <footer></footer>
+    </body>
+  </html>
+  `;
+};

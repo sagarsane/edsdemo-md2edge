@@ -15,7 +15,7 @@
 
 import { Core } from "@adobe/aio-sdk";
 import { errorResponse } from "../utils.js";
-import md2html from "./Md2Html.js";
+import markdownItToHtml from "./MarkdownIt.js";
 
 const gitProxy =
   "https://raw.githubusercontent.com/ahmed-musallam/md/refs/heads/main/content";
@@ -42,7 +42,7 @@ export const main = async function main(params) {
       const mdString = await response.text();
       return {
         statusCode: 200,
-        body: await md2html(mdString),
+        body: markdownItToHtml(mdString),
         headers: {
           "Content-Type": "text/html",
         },
