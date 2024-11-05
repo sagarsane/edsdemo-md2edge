@@ -45,7 +45,7 @@ export const main = async function main(params) {
         body: markdownItToHtml(mdString),
         headers: {
           "Content-Type": "text/html",
-          "Cache-Control": "public, max-age=60",
+          "Cache-Control": "no-cache, no-store",
         },
       };
     } else {
